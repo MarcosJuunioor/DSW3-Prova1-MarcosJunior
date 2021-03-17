@@ -10,13 +10,16 @@ package tads.dsw3.prova1.marcosjunior.models;
  * @author marco
  */
 public class Celula {
+
     private int linha;
     private String coluna;
+    private String cor;
     private boolean ocupada;
-    
-    public Celula(int linha, String coluna){
+
+    public Celula(int linha, String coluna, String cor) {
         this.linha = linha;
         this.coluna = coluna;
+        this.cor = cor;
         this.ocupada = false;
     }
 
@@ -34,6 +37,16 @@ public class Celula {
         this.linha = linha;
     }
 
+    //Retorna true se linha puder ser incrementada, ou false, se não.
+    public boolean podeIncrementarLinha(Tabuleiro tab) {
+        return (!tab.celulaEstaOcupada(this.linha + 1, this.coluna) && (this.linha < 20));
+
+    }
+
+    public void incrementarLinha() {
+        this.linha++;
+    }
+
     /**
      * @return the coluna
      */
@@ -46,6 +59,52 @@ public class Celula {
      */
     public void setColuna(String coluna) {
         this.coluna = coluna;
+    }
+
+    public boolean podeIncrementarColuna(Tabuleiro tab) {
+        //retorna true se não chegou à coluna "J"
+        int i = this.getIndexColuna();
+        if (i < 9) {
+            return !tab.celulaEstaOcupada(this.linha, Tabuleiro.getColunas()[++i]);
+        } else {
+            return false;
+        }
+    }
+
+    //Atualiza a coluna atual para a próxima coluna
+    public void incrementarColuna() {
+        String[] cols = Tabuleiro.getColunas();
+        int i = this.getIndexColuna();
+        this.coluna = cols[++i];
+    }
+
+    //retorna true se a coluna não for "A" (índice 0) e  se a coluna à esquerda estiver livre
+    public boolean podeDecrementarColuna(Tabuleiro tab) {
+        int i = this.getIndexColuna();
+        if (i > 0) {
+            return !tab.celulaEstaOcupada(this.linha, Tabuleiro.getColunas()[--i]);
+        } else {
+            return false;
+        }
+    }
+
+    //Atualiza a coluna atual para a coluna anterior
+    public void decrementarColuna() {
+        String[] cols = Tabuleiro.getColunas();
+        int i = this.getIndexColuna();
+        this.coluna = cols[--i];
+    }
+
+    public int getIndexColuna() {
+        String[] cols = Tabuleiro.getColunas();
+        int i = 0;
+        for (String col : cols) {
+            if (col.equals(this.coluna)) {
+                return i;
+            }
+            i++;
+        }
+        return 0;
     }
 
     /**
@@ -61,6 +120,19 @@ public class Celula {
     public void setOcupada(boolean ocupada) {
         this.ocupada = ocupada;
     }
-    
-    
+
+    /**
+     * @return the cor
+     */
+    public String getCor() {
+        return cor;
+    }
+
+    /**
+     * @param cor the cor to set
+     */
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
 }

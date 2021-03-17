@@ -7,18 +7,36 @@
         <link rel="stylesheet" href="resource/css/index.css"/>
     </head>    
     <body>
-        
+
         <div class="container">
             <div class="row">
-                <div class="col"></div>
+                <div class="col-sm"></div>
                 <div class="col-md">
                     <table class="tabuleiros" id="tb1"></table>
-                    <button id="sair">Sair</button>
                 </div>
-                <div class="col">
+                <div class="col-sm">
+                    <div class="div-logo">
+                        <img class="imagem-logo" src="resource/imagens/logo-tetris.jpeg"/>
+                    </div>
+                    <div class="div-proxima-peca card">
+                        <div class="card-body">
+                            <p class="card-title textos">Próxima Peça</p>
+                            <h1 id="id-proxima-peca" class="card-text textos"></h1>
+                        </div>
+                    </div>
+                    <div class="div-mensagem card">
+                        <p id="mensagem" class="textos font-weight-light"></p>
+                    </div>
+                    <div class="div-botoes">
+                        <button id="sair" type="button" class="btn btn-danger">Sair</button>
+                        <button id="iniciar" onclick="comecarJogo()" type="button" class="btn btn-success" disabled>Iniciar</button>
+                        <button id="reiniciar" class="reiniciar btn btn-primary" disabled>Reiniciar</button>
+                    </div>
+                </div>
+                <div class="col-md">
                     <table class="tabuleiros" id="tb2"></table>
                 </div>
-                <div class="col"></div>
+                <div class="col-sm"></div>
             </div>
         </div>
     </body>

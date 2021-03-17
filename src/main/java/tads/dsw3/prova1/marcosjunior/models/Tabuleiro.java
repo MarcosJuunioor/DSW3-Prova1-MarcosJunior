@@ -11,12 +11,12 @@ import java.util.ArrayList;
  *
  * @author marco
  */
-public class Tabuleiro {
+public class Tabuleiro extends Mensagem{
     private final ArrayList<Celula> celulas = new ArrayList<Celula>();
     private Peca pecaAtual;
     private Peca proximaPeca;
     private final String ID;
-    private static final int NUMLINHAS = 30;
+    private static final int NUMLINHAS = 20;
     private static final int NUMCOLUNAS = 10;
     private static final String[] colunas = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     
@@ -26,7 +26,7 @@ public class Tabuleiro {
         //Cria as celulas do tabuleiro
         for(int l=0; l<NUMLINHAS; l++){
             for(int c=0; c<NUMCOLUNAS; c++){
-                celulas.add(new Celula((l+1), colunas[c]));
+                celulas.add(new Celula((l+1), colunas[c], "grey"));
             }
         }
     }
@@ -94,5 +94,26 @@ public class Tabuleiro {
         return colunas;
     }
     
+    public void setTipoConexao(TipoConexao tipo){
+        this.tipo = tipo;
+    }
     
+    public boolean celulaEstaOcupada(int linha, String coluna){
+        for(Celula cel: this.celulas){
+            if(cel.getLinha() == linha && cel.getColuna().equals(coluna)){
+                return cel.isOcupada();
+            }
+        }
+        return true;
+    }
+    
+    public void ocuparCelula(int linha, String coluna, String cor){
+        for(Celula cel: this.celulas){
+            if(cel.getLinha() == linha && cel.getColuna().equals(coluna)){
+                cel.setOcupada(true);
+                cel.setCor(cor);
+                break;
+            }
+        }
+    }
 }
